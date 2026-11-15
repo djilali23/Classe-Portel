@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050a1c" />
+    <title>Classe Portel | بوابة القسم الرقمية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="./logo.png?v=2">
+    <!-- وصف الموقع ومحركات البحث -->
+<meta name="description"
+content="Classe Portel بوابة رقمية للقسم، تعرض جدول استعمال الزمن والتلاميذ والواجبات المدرسية ومساحة النقاش.">
+
+<meta name="keywords"
+content="Classe Portel, بوابة قسمنا, بوابة القسم, التعليم الثانوي, الجزائر, استعمال الزمن, جدول الدراسة, الواجبات المدرسية, التلاميذ, مساحة النقاش">
+
+<meta name="application-name" content="Classe Portel">
+
+<!-- إبقاء البوابة الخاصة خارج نتائج البحث مؤقتًا -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- إعدادات التطبيق -->
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+  </head>
+  <body>
+   <div class="bg">
+  <span class="orb o1"></span>
+  <span class="orb o2"></span>
+  <span class="floor"></span>
+</div>
+    <header class="top">
+      <div class="brand">
+       <img class="logo" src="./logo.png" alt="Classe Portel">
+        <span class="brand-name">Classe <b>Portel</b></span>
+      </div>
+    </header>
+
+    <main>
+              <!-- تسجيل الدخول -->
+      <section id="authSection" class="panel">
+        <div class="card">
+          <h2 class="title">🔐 الدخول إلى بوابة قسمنا</h2>
+
+          <div id="loginForm">
+            <input id="loginUsername" class="search" placeholder="اسم المستخدم">
+            <input id="loginPassword" class="search" type="password" placeholder="كلمة المرور">
+
+            <button id="loginBtn">تسجيل الدخول</button>
+            <p>ليس لديك حساب؟</p>
+            <button id="showSignup">إنشاء حساب</button>
+          </div>
+
+          <div id="signupForm" hidden>
+            <input id="signupUsername" class="search" placeholder="اسم المستخدم">
+            <input id="signupPassword" class="search" type="password" placeholder="كلمة المرور">
+            <input id="inviteCode" class="search" placeholder="رمز الدعوة">
+
+            <button id="signupBtn">إنشاء الحساب</button>
+            <button id="showLogin">العودة للدخول</button>
+          </div>
+
+          <p id="authMessage"></p>
+        </div>
+      </section>
+
+      <!-- الرئيسية -->
+      <section id="home" class="panel">
+        <div class="hero tilt">
+          <div class="hero-text pop">
+            <p class="eyebrow">مرحباً بكم في</p>
+            <h2 class="hero-title">Classe <span>Portel</span></h2>
+            <p class="hero-sub">
+              بوابة قسمنا: الجدول، التلاميذ، الواجبات والنقاش في مكان واحد.
+            </p>
+            <div id="nowBox" class="now"></div>
+          </div>
+          <div class="cube-wrap">
+            <div class="cube">
+              <div class="face f1">📘</div>
+              <div class="face f2">📐</div>
+              <div class="face f3">🔬</div>
+              <div class="face f4">🌍</div>
+              <div class="face f5">✏️</div>
+              <div class="face f6">💻</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat tilt">
+            <b id="statStudents">0</b><span>تلميذ</span>
+          </div>
+          <div class="stat tilt">
+            <b id="statToday">0</b><span>حصص اليوم</span>
+          </div>
+          <div class="stat tilt"><b id="statDay">—</b><span>اليوم</span></div>
+        </div>
+
+        <h3 class="sec">معلومات القسم</h3>
+        <div id="infoGrid" class="grid"></div>
+
+
+     
+      </section>
+
+      <!-- الجدول -->
+      <section id="timetable" class="panel">
+        <h2 class="title">📅 جدول استعمال الزمن</h2>
+        <div id="ttList"></div>
+      </section>
+
+      <!-- التلاميذ -->
+      <section id="students" class="panel">
+        <h2 class="title">
+          👥 تلاميذ القسم <span id="studentCount" class="badge"></span>
+        </h2>
+        <input
+          id="studentSearch"
+          class="search"
+          type="search"
+          placeholder="🔍 ابحث عن اسم..."
+        />
+        <div id="studentGrid" class="grid"></div>
+      </section>
+
+      <!-- الواجبات -->
+<section id="homework" class="panel">
+
+  <h2 class="title">📝 واجبات القسم</h2>
+
+  <!-- نموذج نشر واجب -->
+  <div class="card assignment-create">
+
+    <h3 class="sec">📤 شارك واجباً مع زملائك</h3>
+
+    <form id="assignmentForm">
+
+      <label for="assignmentTitle">عنوان الواجب</label>
+
+      <input
+        type="text"
+        id="assignmentTitle"
+        class="search"
+        placeholder="مثلاً: حل التمرين الثالث"
+        maxlength="100"
+        required
+      >
+
+      <label for="assignmentSubject">المادة</label>
+
+      <select
+        id="assignmentSubject"
+        class="search"
+        required
+      >
+        <option value="">اختر المادة</option>
+        <option value="لغة عربية">لغة عربية</option>
+        <option value="رياضيات">رياضيات</option>
+        <option value="لغة فرنسية">لغة فرنسية</option>
+        <option value="لغة إنجليزية">لغة إنجليزية</option>
+        <option value="علوم إسلامية">علوم إسلامية</option>
+        <option value="علوم طبيعية">علوم طبيعية</option>
+        <option value="علوم فيزيائية">علوم فيزيائية</option>
+        <option value="تاريخ">تاريخ</option>
+        <option value="جغرافيا">جغرافيا</option>
+        <option value="الإعلام الآلي">الإعلام الآلي</option>
+        <option value="رياضة">رياضة</option>
+        <option value="أخرى">أخرى</option>
+      </select>
+
+      <label for="assignmentDescription">تفاصيل الواجب</label>
+
+      <textarea
+        id="assignmentDescription"
+        class="search"
+        rows="4"
+        maxlength="1500"
+        placeholder="اكتب نص الواجب أو التمرين..."
+        required
+      ></textarea>
+
+      <label for="assignmentDueDate">تاريخ التسليم</label>
+
+      <input
+        type="date"
+        id="assignmentDueDate"
+        class="search"
+        required
+      >
+
+      <button type="submit" id="publishAssignmentBtn">
+        📤 نشر الواجب
+      </button>
+<button
+  type="button"
+  id="cancelAssignmentEdit"
+  hidden
+>
+  إلغاء التعديل
+</button>
+
+    </form>
+
+    <p id="assignmentNotice" aria-live="polite"></p>
+
+  </div>
+
+  <!-- قائمة الواجبات -->
+  <h3 class="sec">📚 واجبات التلاميذ</h3>
+
+  <div id="assignmentsList" class="assignments-list">
+
+    <div class="card soon">
+      جار تحميل الواجبات...
+    </div>
+
+  </div>
+
+</section>
+      <!-- الدردشة -->
+<section id="chat" class="panel">
+  <h2 class="title">💬 مساحة النقاش</h2>
+
+  <div class="chat-shell card">
+
+    <div class="chat-toolbar">
+      <strong>محادثة القسم</strong>
+      <span class="chat-status">محادثة مباشرة 🟢</span>
+    </div>
+
+    <div id="chatMessages" class="chat-messages"
+         aria-live="polite">
+      <p class="chat-empty">جار تحميل الرسائل...</p>
+    </div>
+
+    <form id="chatForm" class="chat-form">
+
+      <textarea
+        id="chatInput"
+        rows="2"
+        maxlength="500"
+        placeholder="اكتب رسالتك هنا..."
+        required
+      ></textarea>
+
+      <button type="submit" id="chatSendBtn">
+        إرسال
+      </button>
+
+    </form>
+
+    <p id="chatNotice" class="chat-notice"
+       aria-live="polite"></p>
+
+  </div>
+</section>
+    <nav class="dock" id="tabs">
+      <button data-tab="home" class="active">
+        <i>🏠</i><span>الرئيسية</span>
+      </button>
+      <button data-tab="timetable"><i>📅</i><span>الجدول</span></button>
+      <button data-tab="students"><i>👥</i><span>التلاميذ</span></button>
+      <button data-tab="homework"><i>📝</i><span>الواجبات</span></button>
+      <button data-tab="chat"><i>💬</i><span>الدردشة</span></button>
+      <button data-tab="authSection"><i>🔐</i><span>حسابي</span></button>
+    </nav>
+
+<script type="module" src="script.js"></script>
+  </body>
+</html>
